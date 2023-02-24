@@ -1,0 +1,173 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<script type="text/javascript" src="diffusion.js" ></script>
+
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>Untitled 2</title>
+<style type="text/css">
+a {
+	color: #FFFFCC;
+}
+.auto-style1 {
+	font-family: Arial, Helvetica, sans-serif;
+	position:absolute;
+	left:450px;
+	color: #0000FF;
+	font-size: x-large;
+}
+canvas{
+	position: absolute;
+  left: 165px;
+  top: 70px;
+}
+buttons{
+	
+	position:absolute;
+	left:0px;
+	top:0px;
+	font-size:x-large
+	}
+number{
+width: 150px;
+height: 25px;
+
+}
+texto{
+	position:absolute;
+	width:300px;
+	height:600px;
+	left:800px;
+	top:100px;
+}
+</style>
+
+<style type="text/css">
+.slidecontainer {
+position:absolute;
+left:5px;
+top:350px;
+width: 10%;
+}
+
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: #4CAF50;
+  cursor: pointer;
+}
+.auto-style2 {
+	font-family: Arial, Helvetica, sans-serif;
+	color: #0000FF;
+	text-align: center;
+}
+.auto-style3 {
+	margin-left: 907px;
+}
+.auto-style4 {
+	font-size: large;
+	font-family: Arial, Helvetica, sans-serif;
+	background-color: #00FF00;
+}
+.auto-style5 {
+	font-size: large;
+	font-family: Arial, Helvetica, sans-serif;
+	background-color: #00FFFF;
+}
+.auto-style6 {
+	font-size: large;
+	font-family: Arial, Helvetica, sans-serif;
+	background-color: #FFFF00;
+}
+.auto-style7 {
+	background-color: #C0C0C0;
+}
+.auto-style8 {
+	font-size: large;
+	font-family: Arial, Helvetica, sans-serif;
+}
+.auto-style9 {
+	font-size: large;
+	font-family: Arial, Helvetica, sans-serif;
+	background-color: #C0C0C0;
+}
+.auto-style10 {
+	background-color: #FF9900;
+}
+.auto-style11 {
+	font-size: large;
+	font-family: Arial, Helvetica, sans-serif;
+	color: #0000FF;
+}
+.auto-style12 {
+	font-size: large;
+	font-family: Arial, Helvetica, sans-serif;
+	background-color: #E9E8E5;
+}
+.auto-style13 {
+	background-color: #E9E8E5;
+}
+</style></head>
+
+<body style="background-color: #FFFFCC; height: 547px;">
+<h1 class="auto-style2">DIFFUSION</h1>
+
+
+<p class="auto-style1"><strong>DIFFUSION </strong></p>
+	  <div id="buttons" style="width: 144px; height: 63px" >
+	<br />
+	<button id="start" name="start" style=" background:lime; width:140px; height: 30px;font-size:large " value="START" onclick="start()">START</button>
+	<button id="freeze" name="start" style="background:aqua; width:140px; height: 30px;font-size:large " value="freeze" onclick="freeze()">freeze</button>
+	<button id="resume" name="start" style="background:yellow; width: 140px; height: 30px;font-size:large " value="resume" onclick="resume()">resume</button>
+	<p 
+	/>
+	<input type="submit" id="mark" name="mark" style="background:#FF9900; width: 140px; height: 30px; font-size:large" value="mark" onclick="mark()">
+	<p >
+	<input type="button" id="field"name="field" style="width: 140px; height: 30px; font-size:large" value="Impose field" onclick="field()">
+	<input type="submit"id="container"name="container" style="width: 140px; height: 30px;font-size:16px" value="remove container" onclick="container()">
+	<input type="submit"id="channel"name="channel" style="width: 140px; height: 30px; font-size:large" value="open channel" onclick="openChannel()">&nbsp;
+		  <br />
+		  <br />
+		  Molecules in Container:<textarea id="particles"name="TextArea1" cols="6" rows="1" style="font-size:x-large"></textarea><br />
+		  <br />
+		  Temperature 
+		  <input type="number" id="temperature" value="20" style="width: 119px" onchange="temperature();">
+
+	  <canvas id="canvas" width="740" height="650" style=" background:gray; border:0px solid #000000" ></canvas></div>
+    
+<div title="texto" class="auto-style3"><span class="auto-style11"><strong>Diffusion: Thermal motion and directed fields.</strong></span><br class="auto-style8" />
+	<span class="auto-style8">In this simulation a total of 2000 molecules are set free in the center of a container and their motion is observed in time.<br />
+	</span><br class="auto-style8" />
+&nbsp;<span class="auto-style4">START</span><span class="auto-style8">, initiates the process.
+	</span><br class="auto-style8" />
+	<span class="auto-style5">&nbsp;freeze,</span><span class="auto-style8"> freezes action.&nbsp;
+	</span><br class="auto-style8" />
+&nbsp;<span class="auto-style6">resume,</span><span class="auto-style8"> resumes the simulation.
+
+	</span><br class="auto-style8" />
+	<span class="auto-style8"><span class="auto-style10">mark,</span> labels one of the molecules.
+	</span><br class="auto-style8" />
+	<br class="auto-style8" />
+	<span class="auto-style8">The container can be removed (</span><span class="auto-style12">remove 
+	container</span><span class="auto-style8">), allowing the free escape of the molecules to 
+	infinite space. The number of molecules left in the area where the container was is shown in 
+	Molecules in container. Container may be resored with
+	<span class="auto-style13">restore container</span>.<br />
+&nbsp;</span><br class="auto-style8" />
+	<span class="auto-style8">A hole can be opened in the container to allow the escape through a restricted area (</span><span class="auto-style12">open channel</span><span class="auto-style8">) which then can be subsequently closed (</span><span class="auto-style12">close channel</span><span class="auto-style8">).
+
+	<br />
+	</span><br class="auto-style8" />
+	<span class="auto-style8">A force field&nbsp; can be applied at any time (</span><span class="auto-style9">I</span><span class="auto-style12">mpose 
+	a Field</span><span class="auto-style8">) and subsequently removed (r<span class="auto-style13">emove 
+	field)</span>. <br />
+	</span><span class="auto-style7"><br class="auto-style8" />
+	<span class="auto-style12">Temperature </span></span>
+	<span class="auto-style8">may be modified (between 2 and 100 C) by typing a value in the temperature field.</span></div>
+</body>
+
+</html>
